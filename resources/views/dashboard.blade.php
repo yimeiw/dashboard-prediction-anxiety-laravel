@@ -8,13 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                
-                <div class="p- text-gray-900">
+
+                <div class="p-5 text-gray-900">
                     {{ __('Please input your data!') }}
                 </div>
 
 
-                <form action="" method="post" class="p-4">
+                <form action="" method="post" class="p-2">
                     @csrf
                     <div class="flex flex-row justify-between gap-x-4 gap-y-2">
 
@@ -55,7 +55,7 @@
                                 <input type="text" name="sleepHours" id="sleepHours" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ex: 1.5 (1 hours 5 minute)" required>
                             </div>
 
-                            
+
                             <div class="mb-8">
                                 <label for="physicalActivity" class="block text-gray-700 text-sm font-bold mb-2">How many minutes of physical activity do you do daily?</label>
                                 <input type="text" name="physicalActivity" id="physicalActivity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ex: 1.5 (1 hours 5 minute)" required>
@@ -189,7 +189,7 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-end px-3 mt-4">
+                    <div class="flex justify-end p-3 mt-4">
                         <button type="submit" class="border-blue-1 bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none">
                             Submit
                         </button>
@@ -197,7 +197,7 @@
 
 
                 </form>
-                
+
             </div>
         </div>
     </div>

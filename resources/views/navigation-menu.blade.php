@@ -16,6 +16,18 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('anxiety-prediction') }}" :active="request()->routeIs('anxiety-prediction')">
+                        {{ __('Anxiety Prediction') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('prediction-result') }}" :active="request()->routeIs('prediction-result')">
+                        {{ __('Prediction Result') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -124,7 +136,7 @@
                 </div>
             </div>
 
-            <!-- Hamburger -->
+            <!-- Mobile Menu Toggle Button -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="size-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -136,37 +148,76 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+    <!-- Responsive Navigation Sidebar -->
+    <div :class="{'translate-x-0': open, '-translate-x-full': !open}"
+         class="fixed top-0 left-0 bottom-0 flex flex-col w-64 bg-white border-r border-gray-200 shadow-lg transform transition-transform duration-300 ease-in-out z-50 sm:hidden">
+
+        <!-- Sidebar Header with Close Button -->
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <a href="{{ route('dashboard') }}">
+                    <x-application-mark class="block h-9 w-auto" />
+                </a>
+            </div>
+            <button @click="open = false" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="shrink-0 me-3">
-                        <img class="size-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                    </div>
-                @endif
-
-                <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
+        <!-- Sidebar Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Navigation Links -->
+            <div class="py-1 space-y-1 border-b border-gray-200">
+                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
+                                      class="block px-4 py-3 text-base font-medium">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="py-1 space-y-1 border-b border-gray-200">
+                <x-responsive-nav-link href="{{ route('anxiety-prediction') }}" :active="request()->routeIs('anxiety-prediction')"
+                                      class="block px-4 py-3 text-base font-medium">
+                    {{ __('Anxiety Prediction') }}
+                </x-responsive-nav-link>
             </div>
 
-            <div class="mt-3 space-y-1">
+            <div class="py-1 space-y-1 border-b border-gray-200">
+                <x-responsive-nav-link href="{{ route('prediction-result') }}" :active="request()->routeIs('prediction-result')"
+                                      class="block px-4 py-3 text-base font-medium">
+                    {{ __('Prediction Result') }}
+                </x-responsive-nav-link>
+            </div>
+
+
+            <!-- User Profile Section -->
+            <div class="py-4 border-b border-gray-200">
+                <div class="flex items-center px-4 mb-3">
+                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                        <div class="shrink-0 me-3">
+                            <img class="size-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        </div>
+                    @endif
+
+                    <div>
+                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    </div>
+                </div>
+
                 <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                <div class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    {{ __('Manage Account') }}
+                </div>
+
+                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')"
+                                      class="block px-4 py-2 text-sm font-medium">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')"
+                                          class="block px-4 py-2 text-sm font-medium">
                         {{ __('API Tokens') }}
                     </x-responsive-nav-link>
                 @endif
@@ -174,47 +225,59 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
-
-                    <x-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
+                    <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();"
+                                          class="block px-4 py-2 text-sm font-medium">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+            </div>
 
-                <!-- Team Management -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="border-t border-gray-200"></div>
-
-                    <div class="block px-4 py-2 text-xs text-gray-400">
+            <!-- Team Management -->
+            @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                <div class="py-4">
+                    <div class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                         {{ __('Manage Team') }}
                     </div>
 
                     <!-- Team Settings -->
-                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
+                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')"
+                                          class="block px-4 py-2 text-sm font-medium">
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
 
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')"
+                                              class="block px-4 py-2 text-sm font-medium">
                             {{ __('Create New Team') }}
                         </x-responsive-nav-link>
                     @endcan
 
                     <!-- Team Switcher -->
                     @if (Auth::user()->allTeams()->count() > 1)
-                        <div class="border-t border-gray-200"></div>
-
-                        <div class="block px-4 py-2 text-xs text-gray-400">
+                        <div class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4">
                             {{ __('Switch Teams') }}
                         </div>
 
                         @foreach (Auth::user()->allTeams() as $team)
-                            <x-switchable-team :team="$team" component="responsive-nav-link" />
+                            <x-switchable-team :team="$team" component="responsive-nav-link"
+                                              class="block px-4 py-2 text-sm font-medium" />
                         @endforeach
                     @endif
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
+    </div>
+
+    <!-- Mobile Menu Backdrop -->
+    <div x-show="open"
+         class="sm:hidden fixed inset-0 bg-gray-500 bg-opacity-75 z-40"
+         @click="open = false"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0">
     </div>
 </nav>
 

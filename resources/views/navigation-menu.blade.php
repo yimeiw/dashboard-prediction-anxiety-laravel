@@ -17,10 +17,17 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
+                    <x-nav-link href="{{ route('anxiety-prediction') }}" :active="request()->routeIs('anxiety-prediction')">
+                        {{ __('Anxiety Prediction') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('prediction-result') }}" :active="request()->routeIs('prediction-result')">
+                        {{ __('Prediction Result') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -169,11 +176,19 @@
                 </x-responsive-nav-link>
             </div>
             <div class="py-1 space-y-1 border-b border-gray-200">
-                <x-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')"
+                <x-responsive-nav-link href="{{ route('anxiety-prediction') }}" :active="request()->routeIs('anxiety-prediction')"
                                       class="block px-4 py-3 text-base font-medium">
-                    {{ __('Home') }}
+                    {{ __('Anxiety Prediction') }}
                 </x-responsive-nav-link>
             </div>
+
+            <div class="py-1 space-y-1 border-b border-gray-200">
+                <x-responsive-nav-link href="{{ route('prediction-result') }}" :active="request()->routeIs('prediction-result')"
+                                      class="block px-4 py-3 text-base font-medium">
+                    {{ __('Prediction Result') }}
+                </x-responsive-nav-link>
+            </div>
+
 
             <!-- User Profile Section -->
             <div class="py-4 border-b border-gray-200">

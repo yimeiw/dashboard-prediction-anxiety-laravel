@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PredictAnxietyController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -18,7 +19,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/anxiety-prediction', function () {
+        return view('anxiety-prediction');
+    })->name('anxiety-prediction');
 });
+
+
+Route::post('/prediction-result', [PredictAnxietyController::class, 'predictAnxiety'])->name('predictAnxiety');
+
+Route::get('/prediction-result', function () {
+    return view('prediction-result');
+})->name('prediction-result');
+

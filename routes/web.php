@@ -22,12 +22,11 @@ Route::middleware([
     Route::get('/anxiety-prediction', function () {
         return view('anxiety-prediction');
     })->name('anxiety-prediction');
+    
 });
+Route::post('/prediction-result', [PredictAnxietyController::class, 'predict'])->name('prediction.result');
 
 
-Route::post('/prediction-result', [PredictAnxietyController::class, 'predictAnxiety'])->name('predictAnxiety');
 
-Route::get('/prediction-result', function () {
-    return view('prediction-result');
-})->name('prediction-result');
+
 

@@ -15,7 +15,7 @@
                 </div>
 
 
-                <form action="{{ route('predictAnxiety') }}" method="post" class="p-2">
+                <form action="{{ route('prediction.result') }}" method="post" class="p-2">
                     @csrf
                     <div class="flex flex-row justify-between gap-x-4 gap-y-2">
 
@@ -68,8 +68,8 @@
                             </div>
 
                             <div class="mb-8">
-                                <label for="workStresLevel" class="block text-gray-700 text-sm font-bold mb-2">Rate your work-related stress (1–12).</label>
-                                <select name="workStresLevel" id="workStresLevel" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <label for="workStressLevel" class="block text-gray-700 text-sm font-bold mb-2">Rate your work-related stress (1–12).</label>
+                                <select name="workStressLevel" id="workStressLevel" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                     <option value="" disabled selected>Select your work stress level</option>
                                     @for($i = 1; $i <= 12; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
@@ -78,8 +78,8 @@
                             </div>
 
                             <div class="mb-8">
-                                <label for="stresLevel" class="block text-gray-700 text-sm font-bold mb-2">Rate your general stress level (1–9).</label>
-                                <select name="stresLevel" id="stresLevel" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <label for="stressLevel" class="block text-gray-700 text-sm font-bold mb-2">Rate your general stress level (1–9).</label>
+                                <select name="stressLevel" id="stressLevel" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                     <option value="" disabled selected>Select your stress level</option>
                                     @for($i = 1; $i <= 9; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
@@ -128,10 +128,10 @@
                             </div>
 
                             <div class="mb-8">
-                                <label for="gadScale" class="block text-gray-700 text-sm font-bold mb-2">Input your GAD score (scale: 1–9).</label>
+                                <label for="gadScale" class="block text-gray-700 text-sm font-bold mb-2">Input your GAD score (scale: 0–21).</label>
                                 <select name="gadScale" id="gadScale" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                     <option value="" disabled selected>Select your GAD score</option>
-                                    @for($i = 1; $i <= 9; $i++)
+                                    @for($i = 0; $i <= 21; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
@@ -172,7 +172,7 @@
                                 <label for="exerciseFrequency" class="block text-gray-700 text-sm font-bold mb-2">How often do you exercise? (1 = never, 10 = very often)</label>
                                 <select name="exerciseFrequency" id="exerciseFrequency" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                     <option value="" disabled selected>Select your exercise frequency</option>
-                                    @for($i = 1; $i <= 10; $i++)
+                                    @for($i = 0; $i < 10; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
